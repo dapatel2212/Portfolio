@@ -112,6 +112,8 @@ router.get('/me', authenticate, async (req, res) => {
   res.json(result.rows[0]);
 });
 
+module.exports = router;
+
 // ─────────────────────────────────────────
 // POST /api/auth/change-password
 // ─────────────────────────────────────────
