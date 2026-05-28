@@ -14,50 +14,12 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
-console.log('Loading routes...');
-try {
-  const authRouter = require('./routes/auth');
-  console.log('Auth router loaded:', !!authRouter);
-  app.use('/api/auth', authRouter);
-  console.log('Auth route mounted');
-} catch (err) {
-  console.error('Error loading auth routes:', err);
-}
-try {
-  const profileRouter = require('./routes/profile');
-  app.use('/api/profile', profileRouter);
-  console.log('Profile route mounted');
-} catch (err) {
-  console.error('Error loading profile routes:', err);
-}
-try {
-  const certificatesRouter = require('./routes/certificates');
-  app.use('/api/certificates', certificatesRouter);
-  console.log('Certificates route mounted');
-} catch (err) {
-  console.error('Error loading certificates routes:', err);
-}
-try {
-  const projectsRouter = require('./routes/projects');
-  app.use('/api/projects', projectsRouter);
-  console.log('Projects route mounted');
-} catch (err) {
-  console.error('Error loading projects routes:', err);
-}
-try {
-  const contactRouter = require('./routes/contact');
-  app.use('/api/contact', contactRouter);
-  console.log('Contact route mounted');
-} catch (err) {
-  console.error('Error loading contact routes:', err);
-}
-try {
-  const adminRouter = require('./routes/admin');
-  app.use('/api/admin', adminRouter);
-  console.log('Admin route mounted');
-} catch (err) {
-  console.error('Error loading admin routes:', err);
-}
+app.use('/api/auth',         require('./routes/auth'));
+app.use('/api/profile',      require('./routes/profile'));
+app.use('/api/certificates', require('./routes/certificates'));
+app.use('/api/projects',     require('./routes/projects'));
+app.use('/api/contact',      require('./routes/contact'));
+app.use('/api/admin',        require('./routes/admin'));
 
 // ─── Health check ─────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
